@@ -71,7 +71,12 @@ def _educonnect(
 
 @typing.no_type_check
 def _cas_edu(
-    username: str, password: str, url: str = "", redirect_form: bool = True
+    username: str,
+    password: str,
+    url: str = "",
+    redirect_form: bool = True,
+    need_service: bool = False,
+    **kwargs: dict,
 ) -> requests.cookies.RequestsCookieJar:
     """
     Generic function for CAS with Educonnect
@@ -99,7 +104,12 @@ def _cas_edu(
 
     # ENT Connection
     with requests.Session() as session:
-        response = session.get(url, headers=HEADERS)
+        params = {}
+
+        if need_service:
+            params["service"] = kwargs.get("pronote_url")
+
+        response = session.get(url, headers=HEADERS, params=params)
 
         if redirect_form:
             soup = BeautifulSoup(response.text, "html.parser")
@@ -124,7 +134,11 @@ def _cas_edu(
 
 @typing.no_type_check
 def _cas(
-    username: str, password: str, url: str = ""
+    username: str,
+    password: str,
+    url: str = "",
+    need_service: bool = False,
+    **kwargs: dict,
 ) -> requests.cookies.RequestsCookieJar:
     """
     Generic function for CAS
@@ -172,7 +186,7 @@ def _cas(
 
 
 def _open_ent_ng(
-    username: str, password: str, url: str = ""
+    username: str, password: str, url: str = "", **kwargs: dict
 ) -> requests.cookies.RequestsCookieJar:
     """
     ENT which has an authentication like https://ent.iledefrance.fr/auth/login
@@ -210,7 +224,7 @@ def _open_ent_ng(
 
 
 def _open_ent_ng_edu(
-    username: str, password: str, domain: str = "", providerId: str = ""
+    username: str, password: str, domain: str = "", providerId: str = "", **kwargs: dict
 ) -> requests.cookies.RequestsCookieJar:
     """
     ENT which has an authentication like https://connexion.l-educdenormandie.fr/
@@ -268,6 +282,7 @@ def _wayf(
     entityID: str = "",
     returnX: str = "",
     redirect_form: bool = True,
+    **kwargs: dict,
 ) -> requests.cookies.RequestsCookieJar:
     """
     Generic function for WAYF
@@ -333,7 +348,7 @@ def _wayf(
 
 @typing.no_type_check
 def _oze_ent(
-    username: str, password: str, url: str = ""
+    username: str, password: str, url: str = "", **kwargs: dict
 ) -> requests.cookies.RequestsCookieJar:
     """
     Generic function for Oze ENT
@@ -386,7 +401,7 @@ def _oze_ent(
 
 @typing.no_type_check
 def _simple_auth(
-    username: str, password: str, url: str = "", form_attr: dict = {}
+    username: str, password: str, url: str = "", form_attr: dict = {}, **kwargs: dict
 ) -> requests.cookies.RequestsCookieJar:
     """
     Generic function for ENT with simple login form

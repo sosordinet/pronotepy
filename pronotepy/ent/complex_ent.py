@@ -17,7 +17,9 @@ HEADERS = {
 
 
 @typing.no_type_check
-def ac_rennes(username: str, password: str) -> requests.cookies.RequestsCookieJar:
+def ac_rennes(
+    username: str, password: str, **kwargs: dict
+) -> requests.cookies.RequestsCookieJar:
     """
     ENT ac Rennes Toutatice.fr
 

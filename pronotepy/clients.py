@@ -67,7 +67,7 @@ class _ClientBase:
         self.ent = ent
         if ent:
             pronote_url = pronote_url.replace("login=true", "")
-            cookies = ent(username, password)
+            cookies = ent(username, password, pronote_url=pronote_url)
         else:
             cookies = None
 
