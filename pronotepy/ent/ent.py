@@ -109,7 +109,7 @@ ac_reims = monbureaunumerique
 
 occitanie_montpellier_educonnect = partial(
     _cas_edu,
-    url="https://cas.mon-ent-occitanie.fr/login?selection=MONT-EDU_parent_eleve",
+    url="https://cas.mon-ent-occitanie.fr/login?selection=MONT-EDU_parent_eleve&service=https%3A%2F%2Fjean-amade.mon-ent-occitanie.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT&submit=Confirm",
 )
 
 """Open ENT NG"""
